@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import {
   UserPlus,
   Mail,
@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStore } from "../stores/useUserStore";
+const navigate  = useNavigate();
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -19,6 +20,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email, password);
+     navigate("/");
   };
   return (
     <div className="flex flex-col justify-center py-12 sm:px-6 lg:px-8">
