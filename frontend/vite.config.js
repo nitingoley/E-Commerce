@@ -7,9 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://e-commerce-1-6q5w.onrender.com",  
-        changeOrigin: true,  
-        secure: false  
+        target: "https://e-commerce-1-6q5w.onrender.com",  // Your Render backend URL
+        changeOrigin: true,  // Ensures the host header is changed to the target URL
       }
     }
   }
