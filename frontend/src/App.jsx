@@ -53,7 +53,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={user ? <Home /> : <Signup />} />
-            <Route path="/login" element={user ? <Home /> : <Login />} />
+            <Route path="/login" element={<Login />} />
             <Route
               path="/secret-dashboard"
               element={user?.role === "admin" ? <AdminPage /> : <Home />}
