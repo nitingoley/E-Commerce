@@ -11,10 +11,17 @@ import AnalyticsRoute from "./routes/analytics.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from "path";
+import { fileURLToPath } from "url";
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 const PORT = 7000;
+
+
+// Get __dirname equivalent in ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ extended: true }));
@@ -34,14 +41,15 @@ app.use("/api/analytics", AnalyticsRoute);
 
 
 
-// serve any client request for production only to redirect to the html index.html page
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+// serve any client request for production only to redirect to the html index.html
 
-  app.use("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"));
-  });
-}
+
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+ // any request redirect index.html page
+app.use("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
 
 app.listen(PORT, () => {
   ConnectDB();
